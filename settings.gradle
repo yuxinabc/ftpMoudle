@@ -1,0 +1,5 @@
+include ':app'
+include ':imageselector'
+include ':recycleViewAdapter'
+include ':uploadservice'
+include ':uploadservice-ftp'

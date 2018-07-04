@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">图片上传服务</string>
+    <string name="uploading">已上传 [[UPLOADED_FILES]] of [[TOTAL_FILES]] at [[UPLOAD_RATE]] - [[PROGRESS]]</string>
+    <string name="upload_success">图片上传成功 耗时 [[ELAPSED_TIME]]</string>
+    <string name="upload_error">上传异常</string>
+    <string name="upload_cancelled">上传已取消</string>
+    <string name="ftp_upload">图片上传</string>
+    <string name="cancel_upload">取消</string>
+    <string name="params_settings">参数设置</string>
+    <string name="picture_see">图片预览</string>
+    <string name="picture_upload">图片上传</string>
+    <string name="picture_manager">图片管理</string>
+    <string name="empty_no_data">没有数据</string>
+
+</resources>
