@@ -5,4 +5,8 @@ android ftp上传和下载图片，使用glide加载
 ##### 图片预览  
 <img src="https://note.youdao.com/yws/api/personal/file/9B4808F1D9BB4001BECFAD134AF2DC19?method=download&shareKey=9d2fb4c332089ff2c1929a639b809702" width="50%" />  
 ##### 参考项目  
-FTP上传：https://github.com/gotev/android-upload-service
+FTP上传：https://github.com/gotev/android-upload-service  
+
+RecyclerView 分类：https://github.com/CymChad/BaseRecyclerViewAdapterHelper  
+
+图片选择：https://github.com/donkingliang/ImageSelector
