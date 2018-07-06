@@ -3,6 +3,8 @@ package com.synertone.ftpmoudle;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +46,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class FTPPictureBrowseActivity extends BaseActivity {
+    private static final int ERROR_MESSAGE = 0;
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_bar_title)
@@ -150,7 +153,36 @@ public class FTPPictureBrowseActivity extends BaseActivity {
     public void onViewClicked() {
         finish();
     }
-
+     Handler mH=new Handler(){
+         @Override
+         public void handleMessage(Message msg) {
+             super.handleMessage(msg);
+             int what = msg.what;
+             if(what==ERROR_MESSAGE){
+                String message= (String) msg.obj;
+                 TextView tv_content = notDataView.findViewById(R.id.tv_content);
+                 tv_content.setText(getFormatError(message));
+                 sectionAdapter.setEmptyView(notDataView);
+             }
+         }
+     };
+    private String getFormatError(String message) {
+        if(message!=null){
+            if(message.contains("with username")){
+                return "用户名或密码输入错误！";
+            }
+            if(message.contains("Connection refused")){
+                return "连接被拒绝，请检查WIFI或端口！";
+            }
+            if(message.contains("connect timed out")||message.contains("No route to host")){
+                return "连接超时，请检查WIFI或主机域名！";
+            }
+            if(message.contains("Network is unreachable")){
+                return "网络不可用，请检查网络！";
+            }
+        }
+        return null;
+    }
     class AsyncGetFPTUrls extends AsyncTask<FTPUserModel, Void, TreeMap<String,List<FTPPictureModel>>> {
         private FTPClient ftpClient;
         public static final String DEFAULT_SECURE_SOCKET_PROTOCOL = "TLS";
@@ -176,6 +208,7 @@ public class FTPPictureBrowseActivity extends BaseActivity {
                     ftpClient.logout();
                 } catch (Exception e) {
                     e.printStackTrace();
+                    mH.sendMessage(mH.obtainMessage(ERROR_MESSAGE,e.getMessage()));
                 } finally {
                     if (ftpClient.isConnected()) {
                         try {
@@ -275,7 +308,7 @@ public class FTPPictureBrowseActivity extends BaseActivity {
         protected void onPostExecute(TreeMap<String,List<FTPPictureModel>> treeMap) {
             super.onPostExecute(treeMap);
             if(treeMap==null||treeMap.size()==0){
-                sectionAdapter.setEmptyView(notDataView);
+                //sectionAdapter.setEmptyView(notDataView);
                 return;
             }
             picTreeMap=treeMap;

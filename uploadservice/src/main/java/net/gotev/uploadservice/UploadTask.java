@@ -447,7 +447,7 @@ public abstract class UploadTask implements Runnable {
             if(message.contains("Connection refused")){
                 return "连接被拒绝，请检查WIFI或端口！";
             }
-            if(message.contains("connect timed out")){
+            if(message.contains("connect timed out")||message.contains("No route to host")){
                 return "连接超时，请检查WIFI或主机域名！";
             }
             if(message.contains("Network is unreachable")){
