@@ -28,11 +28,11 @@ public class ClipImageView extends AppCompatImageView {
     private int mBitmapWidth;
     private int mBitmapHeight;
 
-    private final int MODE_NONE = 0;
-    private final int MODE_DRAG = 1;
-    private final int MODE_ZOOM = 2;
-    private final int MODE_POINTER_UP = 3;
-    private int CURR_MODE = MODE_NONE;
+    private static final int MODE_NONE = 0;
+    private static final int MODE_DRAG = 1;
+    private static final int MODE_ZOOM = 2;
+    private static final int MODE_POINTER_UP = 3;
+    private  int CURR_MODE = MODE_NONE;
 
     private float mLastDistance;
 
@@ -95,10 +95,10 @@ public class ClipImageView extends AppCompatImageView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        mCircleCenterX = getWidth() / 2;
-        mCircleCenterY = getHeight() / 2;
-        mCircleX = mCircleCenterX - mTargetWidth / 2;
-        mCircleY = mCircleCenterY - mTargetHeight / 2;
+        mCircleCenterX = getWidth() / 2f;
+        mCircleCenterY = getHeight() / 2f;
+        mCircleX = mCircleCenterX - mTargetWidth / 2f;
+        mCircleY = mCircleCenterY - mTargetHeight / 2f;
     }
 
     private void setRadius() {
@@ -135,8 +135,8 @@ public class ClipImageView extends AppCompatImageView {
         //设置Xfermode，目的是为了去除矩形黑色半透明蒙板层和圆形的相交部分
         mFrontGroundPaint.setXfermode(mXfermode);
         //画入正方形
-        canvas.drawRect(mCircleCenterX - mTargetWidth / 2, mCircleCenterY - mTargetHeight / 2,
-                mCircleCenterX + mTargetWidth / 2, mCircleCenterY + mTargetHeight / 2, mFrontGroundPaint);
+        canvas.drawRect(mCircleCenterX - mTargetWidth / 2f, mCircleCenterY - mTargetHeight / 2f,
+                mCircleCenterX + mTargetWidth / 2f, mCircleCenterY + mTargetHeight / 2f, mFrontGroundPaint);
 
         canvas.restoreToCount(sc);
         //清除Xfermode，防止影响下次画图
@@ -274,6 +274,8 @@ public class ClipImageView extends AppCompatImageView {
                 break;
             case MotionEvent.ACTION_POINTER_UP:
                 CURR_MODE = MODE_POINTER_UP;
+                break;
+            default:
                 break;
         }
         setImageMatrix(mMatrix);

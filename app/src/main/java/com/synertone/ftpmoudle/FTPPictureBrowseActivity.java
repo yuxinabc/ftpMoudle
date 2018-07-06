@@ -36,6 +36,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -109,11 +110,11 @@ public class FTPPictureBrowseActivity extends BaseActivity {
             }
 
             public void loadMore() {
-                Set<String> strings = picTreeMap.keySet();
-                Iterator<String> iterator = strings.iterator();
+                Set<Map.Entry<String, List<FTPPictureModel>>> entries = picTreeMap.entrySet();
+                Iterator<Map.Entry<String, List<FTPPictureModel>>> iterator = entries.iterator();
                 while (iterator.hasNext()){
-                    String next = iterator.next();
-                    List<FTPPictureModel> ftpPictureModels1 = picTreeMap.get(next);
+                    Map.Entry<String, List<FTPPictureModel>> next = iterator.next();
+                    List<FTPPictureModel> ftpPictureModels1 = next.getValue();
                     MySection headSection=new MySection(true,ftpPictureModels1.get(0).getDate(),false);
                     mySectionList.add(headSection);
                     for(FTPPictureModel fp:ftpPictureModels1){
@@ -278,11 +279,11 @@ public class FTPPictureBrowseActivity extends BaseActivity {
                 return;
             }
             picTreeMap=treeMap;
-            Set<String> strings = treeMap.keySet();
-            Iterator<String> iterator = strings.iterator();
+            Set<Map.Entry<String, List<FTPPictureModel>>> entries = treeMap.entrySet();
+            Iterator<Map.Entry<String, List<FTPPictureModel>>> iterator = entries.iterator();
             while (iterator.hasNext()){
-                String next = iterator.next();
-                List<FTPPictureModel> ftpPictureModels1 = treeMap.get(next);
+                Map.Entry<String, List<FTPPictureModel>> next = iterator.next();
+                List<FTPPictureModel> ftpPictureModels1 = next.getValue();
                 MySection headSection=new MySection(true,ftpPictureModels1.get(0).getDate(),false);
                 mySectionList.add(headSection);
                 for(FTPPictureModel fp:ftpPictureModels1){
