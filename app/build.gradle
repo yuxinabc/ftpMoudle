@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -17,7 +17,7 @@ android {
         }
     }
 }
-def butterKnifeVersion = "8.8.1"
+def butterKnifeVersion = "8.5.1"
 def supportVersion = "27.1.1"
 def stethoVersion = "1.4.2"
 def permissionVersion="3.3.1"
